@@ -64,6 +64,10 @@ final class OAuth2Listener
             return;
         }
 
+        if ($this->tokenStorage->getToken()) {
+            return;
+        }
+
         try {
             /** @var OAuth2Token $authenticatedToken */
             $authenticatedToken = $this->authenticationManager->authenticate($this->oauth2TokenFactory->createOAuth2Token($request, null, $this->providerKey));
